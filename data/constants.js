@@ -514,3 +514,17 @@ function getRandom(arr) {
 function randInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+function calculateDistance(a, b) {
+  if(a == b){
+      return 0;
+  } else {
+      startCoords = getCoords(a);
+      endCoords = getCoords(b);
+      return Math.sqrt(Math.pow((startCoords[0] - endCoords[0]), 2) + Math.pow((startCoords[1] - endCoords[1]), 2))
+  }
+}
+
+function moveToPlace(distance) {
+  console.log(distance);
+}
