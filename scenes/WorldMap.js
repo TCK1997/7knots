@@ -1,6 +1,8 @@
-class Map extends Phaser.Scene {
+class WorldMap extends Phaser.Scene {
+    
     constructor() {
-        super("Map");
+        super("WorldMap");
+        
     }
 
     preload() {
@@ -9,6 +11,8 @@ class Map extends Phaser.Scene {
     }
     
     create() {
+        // text1 = this.add.text(10, 10, '', { fill: '#00ff00' });
+        // this.input.mouse.disableContextMenu();
 
         var gameMapEvent = this.add.image(0, 0, 'gameMap').setOrigin(0).setScale( screenWidth / 1326, screenHeight / 1013).setInteractive().on('pointerdown', function (pointer) {
             if ((pointer.x < 95 && pointer.y < 240) && (pointer.y > 200)) {
