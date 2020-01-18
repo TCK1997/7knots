@@ -431,7 +431,7 @@ function toName(id) {
       res = "Lisbon";
       break;
     case 1:
-      res = "Cidade Vilha";
+      res = "CidadeVilha";
       break;
     case 2:
       res = "Mombasa";
@@ -519,12 +519,15 @@ function randInt(min, max) {
 }
 
 function calculateDistance(a, b) {
-  if(a == b){
-      return 0;
+  if (a == b) {
+    return 0;
   } else {
-      startCoords = getCoords(a);
-      endCoords = getCoords(b);
-      return Math.sqrt(Math.pow((startCoords[0] - endCoords[0]), 2) + Math.pow((startCoords[1] - endCoords[1]), 2))
+    startCoords = getCoords(a);
+    endCoords = getCoords(b);
+    return Math.sqrt(
+      Math.pow(startCoords[0] - endCoords[0], 2) +
+        Math.pow(startCoords[1] - endCoords[1], 2)
+    );
   }
 }
 
