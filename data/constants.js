@@ -52,7 +52,7 @@ const cities = {
       perfume: demands.VHI
     }
   },
-  "Cidade Velha": {
+  CidadeVelha: {
     name: "Cidade Velha",
     coord: [15, 381],
     resources: ["gold"],
@@ -498,10 +498,13 @@ function getPrice(id, resource) {
   const charismaModifier = charismaModifiers[getCharisma()];
   let buyingPrice = Math.floor(
     randInt(resourcePrices[resource][0], resourcePrices[resource][1]) *
-    demandModifier *
-    charismaModifier *
-    economyState);
-  let sellingPrice = Math.floor((buyingPrice * randInt(12, 14)) / 10 / charismaModifier);
+      demandModifier *
+      charismaModifier *
+      economyState
+  );
+  let sellingPrice = Math.floor(
+    (buyingPrice * randInt(12, 14)) / 10 / charismaModifier
+  );
   return [buyingPrice, sellingPrice];
 }
 
