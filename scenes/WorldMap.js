@@ -8,6 +8,8 @@ class WorldMap extends Phaser.Scene {
     preload() {
         this.load.image('gameMap', '../assets/gameMap.png')
         this.load.image('backBtn', '../assets/buttons/backBtn.png')
+        this.load.image('compass', '../assets/compass.png')
+        this.load.image('pirateScroll', '../assets/pirateScroll.png')
     }
     
     create() {
@@ -35,15 +37,13 @@ class WorldMap extends Phaser.Scene {
                 this.scene.scene.start("Port") //8. Makassar
             } else if ((pointer.x < screenWidth/980*935 && pointer.y < screenHeight/816*239) && (pointer.x > screenWidth/980*890 && pointer.y > screenHeight/816*200)) {
                 this.scene.scene.start("Port") //9. Canton
+            } else if ((pointer.x < screenWidth/980*130 && pointer.y < screenHeight/816*85) && (pointer.x > screenWidth/980*75 && pointer.y > screenHeight/816*67)) {
+                this.scene.scene.start("Port") //0. Lisbon
             }
         })
 
-        var font = { font: '24px Arial' };
-
-        var text = this.add.text(60, 60, "Map here", font)
-
         //Back button
-        var backEvent = this.add.image(screenWidth*0.1, screenHeight*0.85, "backBtn", font).setInteractive().on('pointerdown', function (pointer) {
+        var backEvent = this.add.image(screenWidth*0.08, screenHeight*0.92, "backBtn").setInteractive().on('pointerdown', function (pointer) {
             this.scene.scene.start("MainMenu")
         })
 
@@ -54,7 +54,29 @@ class WorldMap extends Phaser.Scene {
         backEvent.on('pointerout',function(pointer){
             backEvent.setAlpha(1);
         })
-        
+
+        //Top Bar, Date
+        const scroll = this.add.image(5.25 * screenWidth/7, 1/20 * screenHeight, "Scroll").setOrigin(0).setScale(screenWidth / (561 * 4), screenHeight / (400 * 12));
+        const scrollTextStyle = { font: "18px Arial", fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
+        const textTwo = this.add.text(5.45 * screenWidth/7, 1/14 * screenHeight, "PlaceholderText, Day 322", scrollTextStyle);
+
+        //Compass
+        this.add.image(screenWidth*0.93, screenHeight*0.85, "compass").setScale(0.5)
+
+        //ETA
+        this.add.image(screenWidth*0.73, screenHeight*0.858, "pirateScroll").setScale(0.6)
+
+        var font = { font: '18px Arial', fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
+
+        var text = this.add.text(screenWidth/1150*738, screenHeight/555*464, "Estimated Date to Arrival", font)
+
+        //Morale Bar
+        this.add.image(screenWidth*0.45, screenHeight*0.858, "pirateScroll").setScale(0.6)
+
+        var font = { font: '18px Arial', fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
+
+        var text = this.add.text(screenWidth/1150*420, screenHeight/555*464, "Morale: 1700/3000", font)
+
     }
     
     update() {
