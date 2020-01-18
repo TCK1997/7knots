@@ -92,7 +92,7 @@ class Port extends Phaser.Scene {
   }
 
   create() {
-    portNameAPI = toName(getLocation);
+    // portNameAPI = toName(getLocation);
 
     const _this = this;
 
@@ -246,14 +246,8 @@ class Port extends Phaser.Scene {
       scrollTextStyle
     );
 
-    //portName, Top Bar
-    const pirateScroll = this.add.image(screenWidth*0.32, screenHeight*0.04, "pirateScroll").setOrigin(0).setScale(0.6);
-    const pirateScrollTextStyle = { font: "22px Arial", fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
-    const portName = this.add.text(screenWidth*0.4, screenHeight*0.085, portNameAPI, pirateScrollTextStyle);
-
   }
 
-  
 
   update() {}
 }
