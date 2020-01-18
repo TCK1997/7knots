@@ -54,7 +54,7 @@ const cities = {
   },
   CidadeVelha: {
     name: "Cidade Velha",
-    coord: [15, 381],
+    coords: [15, 381],
     resources: ["gold"],
     culture: "PT",
     demand: {
