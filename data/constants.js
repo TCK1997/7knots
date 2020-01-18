@@ -52,7 +52,7 @@ const cities = {
       perfume: demands.VHI
     }
   },
-  "Cidade Velha": {
+  CidadeVelha: {
     name: "Cidade Velha",
     coord: [15, 381],
     resources: ["gold"],
@@ -431,7 +431,7 @@ function toName(id) {
       res = "Lisbon";
       break;
     case 1:
-      res = "Cidade Vilha";
+      res = "CidadeVilha";
       break;
     case 2:
       res = "Mombasa";
@@ -498,10 +498,13 @@ function getPrice(id, resource) {
   const charismaModifier = charismaModifiers[getCharisma()];
   let buyingPrice = Math.floor(
     randInt(resourcePrices[resource][0], resourcePrices[resource][1]) *
-    demandModifier *
-    charismaModifier *
-    economyState);
-  let sellingPrice = Math.floor((buyingPrice * randInt(12, 14)) / 10 / charismaModifier);
+      demandModifier *
+      charismaModifier *
+      economyState
+  );
+  let sellingPrice = Math.floor(
+    (buyingPrice * randInt(12, 14)) / 10 / charismaModifier
+  );
   return [buyingPrice, sellingPrice];
 }
 
@@ -516,12 +519,15 @@ function randInt(min, max) {
 }
 
 function calculateDistance(a, b) {
-  if(a == b){
-      return 0;
+  if (a == b) {
+    return 0;
   } else {
-      startCoords = getCoords(a);
-      endCoords = getCoords(b);
-      return Math.sqrt(Math.pow((startCoords[0] - endCoords[0]), 2) + Math.pow((startCoords[1] - endCoords[1]), 2))
+    startCoords = getCoords(a);
+    endCoords = getCoords(b);
+    return Math.sqrt(
+      Math.pow(startCoords[0] - endCoords[0], 2) +
+        Math.pow(startCoords[1] - endCoords[1], 2)
+    );
   }
 }
 
