@@ -13,12 +13,26 @@ const demands = {
   EXT: 10
 };
 
+const charismaModifiers = [1, 1.04, 1.08, 1.12, 1.16, 1.2];
+const navigationModifiers = [1, 0.95, 0.9, 0.85, 0.8, 0.7];
+const motivationModifiers = [-6, -12, -18, -24, -30, -36];
+
 const corner = [1853, 1008];
 
+class CrewMember {
+  constructor(id) {
+    this.name = getCrewName(id);
+    this.charisma = randInt(0, 5);
+    this.navigation = randInt(0, 5);
+    this.motivation = randInt(0, 5);
+    this.price = 30 * (this.charisma + this.navigation + this.motivation);
+  }
+}
+
 const cities = {
-  0: {
+  Lisbon: {
     name: "Lisbon",
-    coord: [160, 91],
+    coords: [160, 91],
     resources: ["cloth", "wine", "silver"],
     culture: "PT",
     demand: {
@@ -38,7 +52,7 @@ const cities = {
       perfume: demands.VHI
     }
   },
-  1: {
+  "Cidade Velha": {
     name: "Cidade Velha",
     coord: [15, 381],
     resources: ["gold"],
@@ -60,9 +74,9 @@ const cities = {
       perfume: demands.HI
     }
   },
-  2: {
+  Mombasa: {
     name: "Mombasa",
-    coord: [801, 566],
+    coords: [801, 566],
     resources: ["gold", "coffee"],
     culture: "EA",
     demand: {
@@ -72,7 +86,7 @@ const cities = {
       gold: demands.ABS,
       coffee: demands.VLO,
       pepper: demands.HI,
-      cotton: demands.Hi,
+      cotton: demands.HI,
       sugar: demands.HI,
       clove: demands.VHI,
       nutmeg: demands.VHI,
@@ -82,9 +96,9 @@ const cities = {
       perfume: demands.VHI
     }
   },
-  3: {
+  Socotra: {
     name: "Socotra",
-    coord: [961, 412],
+    coords: [961, 412],
     resources: ["coffee", "gold", "silver"],
     culture: "PT",
     demand: {
@@ -104,9 +118,9 @@ const cities = {
       perfume: demands.HI
     }
   },
-  4: {
+  Calicut: {
     name: "Calicut",
-    coord: [1247, 442],
+    coords: [1247, 442],
     resources: ["pepper", "cotton", "sugar"],
     culture: "IN",
     demand: {
@@ -126,9 +140,9 @@ const cities = {
       perfume: demands.VHI
     }
   },
-  5: {
+  Goa: {
     name: "Goa",
-    coord: [961, 412],
+    coords: [961, 412],
     resources: ["cotton", "pepper", "sugar"],
     culture: "IN",
     demand: {
@@ -148,9 +162,9 @@ const cities = {
       perfume: demands.HI
     }
   },
-  6: {
+  Colombo: {
     name: "Colombo",
-    coord: [1289, 473],
+    coords: [1289, 473],
     resources: ["sugar", "pepper", "cotton"],
     culture: "IN",
     demand: {
@@ -170,9 +184,9 @@ const cities = {
       perfume: demands.HI
     }
   },
-  7: {
+  Malacca: {
     name: "Malacca",
-    coord: [1576, 515],
+    coords: [1576, 515],
     resources: ["clove", "nutmeg", "porcelain"],
     culture: "ML",
     demand: {
@@ -192,9 +206,9 @@ const cities = {
       perfume: demands.LOW
     }
   },
-  8: {
+  Makassar: {
     name: "Makassar",
-    coord: [1787, 603],
+    coords: [1787, 603],
     resources: ["mace", "nutmeg"],
     culture: "ML",
     demand: {
@@ -214,9 +228,9 @@ const cities = {
       perfume: demands.HI
     }
   },
-  9: {
+  Canton: {
     name: "Canton",
-    coord: [1726, 286],
+    coords: [1726, 286],
     resources: ["porcelain", "silk", "perfume"],
     culture: "CH",
     demand: {
@@ -236,6 +250,23 @@ const cities = {
       perfume: demands.VLO
     }
   }
+};
+
+const resourcePrices = {
+  cloth: [10, 20],
+  wine: [30, 80],
+  silver: [50, 90],
+  gold: [80, 120],
+  coffee: [70, 90],
+  pepper: [80, 120],
+  cotton: [20, 50],
+  sugar: [30, 60],
+  clove: [100, 150],
+  nutmeg: [100, 150],
+  mace: [200, 250],
+  porcelain: [90, 130],
+  silk: [60, 80],
+  perfume: [80, 100]
 };
 
 const names = {
@@ -392,3 +423,94 @@ const names = {
     "Zhong"
   ]
 };
+
+function toName(id) {
+  let res;
+  switch (id) {
+    case 0:
+      res = "Lisbon";
+      break;
+    case 1:
+      res = "Cidade Vilha";
+      break;
+    case 2:
+      res = "Mombasa";
+      break;
+    case 3:
+      res = "Socotra";
+      break;
+    case 4:
+      res = "Calicut";
+      break;
+    case 5:
+      res = "Goa";
+      break;
+    case 6:
+      res = "Colombo";
+      break;
+    case 7:
+      res = "Malacca";
+      break;
+    case 8:
+      res = "Makassar";
+      break;
+    case 9:
+      res = "Canton";
+  }
+  return res;
+}
+
+// Getters
+
+function getName(id) {
+  return toName(id);
+}
+
+function getCoords(id) {
+  const city = toName(id);
+  return cities[city]["coords"];
+}
+
+function getResources(id) {
+  const city = toName(id);
+  return cities[city]["resources"];
+}
+
+function getCulture(id) {
+  const city = toName(id);
+  return cities[city]["culture"];
+}
+/**
+ * Returns a random crew name based on the culture of the current city
+ */
+function getCrewName(id) {
+  const list = names[cities[toName(id)]["culture"]];
+  return getRandom(list);
+}
+
+function getCrewMember(id) {
+  return new CrewMember(id);
+}
+
+function getPrice(id, resource) {
+  const demandModifier = cities[toName(id)]["demand"][resource];
+  const economyState = currState.getEconomyState();
+  const charismaModifier = charismaModifiers[getCharisma()];
+  let buyingPrice =
+    randInt(resourcePrices[resource][0], resourcePrices[resource][1]) *
+    demandModifier *
+    charismaModifier *
+    economyState;
+  let sellingPrice = (buyingPrice * randInt(12, 14)) / 10 / charismaModifier;
+  return [buyingPrice, sellingPrice];
+}
+
+// Helper Functions
+
+function getRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function randInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
