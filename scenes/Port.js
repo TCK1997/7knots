@@ -36,10 +36,43 @@ class Port extends Phaser.Scene {
     });
   }
 
-  fadeAssets(x) {
-    for (let value of Object.values(this.assets)) {
-      value.setAlpha(x);
+  openTable(id, category) {
+    const scroll = this.add.image((1 * screenWidth) / 4, (1 / 10) * screenHeight, "Scroll")
+    .setOrigin(0)
+    .setScale(screenWidth / (561*2), screenHeight / (400 * 1.2));
+
+    let arr;
+    id = currState.location;
+
+    let deleteArr = [];
+
+    switch(category) {
+      case "marketplace":
+        arr = getResources(id);
+        let resourcePriceArr = ["Good" + " Buy/Sell "];
+        
+        for (let i = 0; i < arr.length; i++) {
+          resourcePriceArr.push( arr[i] + " " + getPrice(id, arr[i]));
+        }
+
+        for (let j = 0; j < resourcePriceArr.length; j++) {
+          const ListTextStyle = {
+            font: "18px Arial",
+            fill: "#000",
+            wordWrap: true,
+            wordWrapWidth: scroll.width,
+            align: "center"
+          };
+
+          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (2 * j / 15) * screenHeight + (screenHeight/4), resourcePriceArr[j] , ListTextStyle));
+        }
+        break;
     }
+
+    setTimeout(function() { 
+      deleteArr.map(v => v.destroy());
+      scroll.destroy();
+    }, 3000);
   }
 
   preload() {
@@ -206,7 +239,7 @@ class Port extends Phaser.Scene {
     const textTwo = this.add.text(
       (5.45 * screenWidth) / 7,
       (1 / 14) * screenHeight,
-      "PlaceholderText, Day 322",
+      toName(getLocation()) + ", Day " + getDay(),
       scrollTextStyle
     );
   }
