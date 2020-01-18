@@ -119,8 +119,8 @@ class WorldMap extends Phaser.Scene {
         var text = this.add.text(screenWidth/1150*420, screenHeight/555*464, "Morale: 1700/3000", font)
 
 
-        
 
+        //Animation for ship travel
         graphics = this.add.graphics();
 
         path = { t: 0, vec: new Phaser.Math.Vector2() };
