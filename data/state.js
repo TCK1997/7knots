@@ -26,6 +26,9 @@ let currState = {
 };
 
 // Getters
+function setLocation(location) {
+  currState.location = location;
+}
 
 // Setters
 function getDay() {
