@@ -5,16 +5,20 @@ class Port extends Phaser.Scene {
         this.faded = false;
     }
 
-    setFader(x) {
+    setFader(x, category) {
         let _this = this;
         x.on("pointerdown", function(pointer) {
             _this.faded = !_this.faded;
             if (_this.faded) {
                 _this.fadeAssets(0.5);
+                _this.openTable(x, "marketplace");
             } else {
                 _this.fadeAssets(1);
             }
         });
+    }
+
+    openTable(id, category) {
     }
 
     fadeAssets(x) {
@@ -44,7 +48,6 @@ class Port extends Phaser.Scene {
         //Sand bg
         const sand = this.add.image(0, 0, "Sand").setOrigin(0).setScale((screenWidth / (906)) * 0.8 , screenHeight / (604));
         this.assets.sand = sand;
-        this.setFader(sand);
 
         //Sea
         const sea = this.add.image(3 * screenWidth / 4, 0, "Sea").setOrigin(0).setScale((screenWidth / (264 * 8)) , screenHeight / (324 * 2));
@@ -71,13 +74,13 @@ class Port extends Phaser.Scene {
         const marketplace = this.add.image(screenWidth/14, screenHeight/12, "Marketplace").setOrigin(0).setScale(screenWidth / (843 * 4), screenHeight / (766 * 3))
         .setInteractive();
         this.assets.marketplace = marketplace;
-        this.setFader(marketplace);
+        this.setFader(marketplace, "marketplace");
 
         //Tavern
         const tavern = this.add.image(screenWidth/10, screenHeight/1.5, "Tavern").setOrigin(0).setScale(screenWidth / (695 * 4), screenHeight / (598*4))
         .setInteractive();
         this.assets.tavern = tavern;
-        this.setFader(tavern);
+        this.setFader(tavern, "tavern");
 
         //Cart
         const cart = this.add.image(screenWidth/12, screenHeight/2.25, "Cart").setOrigin(0).setScale(screenWidth / (265 * 8), screenHeight / (171 * 8));
@@ -91,13 +94,12 @@ class Port extends Phaser.Scene {
         const ship = this.add.image(screenWidth/1.2, 2*screenHeight/12, "Ship").setOrigin(0).setScale(screenWidth / (319 * 8), screenHeight / (1091 * 1.25))
         .setInteractive();
         this.assets.ship = ship;
-        this.setFader(ship);
+        this.setFader(ship, "ship");
 
         //Sign
         const  sign = this.add.image(4.25 * screenWidth/7, 1/2 * screenHeight, "Sign").setOrigin(0).setScale(screenWidth / (319 * 5), screenHeight / (189 * 6))
         .setInteractive();
         this.assets.sign = sign;
-        this.setFader(sign);
 
         sign.on("pointerdown", function(pointer) {
             this.scene.scene.start("WorldMap");
