@@ -167,4 +167,8 @@ function pirate() {
   }
 }
 
+function scurvy() {
+  removeCrew();
+}
+
 // Port Events
