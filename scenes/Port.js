@@ -35,6 +35,7 @@ class Port extends Phaser.Scene {
         this.load.image("TreeOne", '../assets/tree_1.png');
         this.load.image("TreeTwo", '../assets/tree_2.png');
         this.load.image("Sign", '../assets/sign.png');
+        this.load.image("Scroll", '../assets/pirateBox.png');
     }
 
     create() {
@@ -87,13 +88,13 @@ class Port extends Phaser.Scene {
         this.assets.stall = stall;
 
         //Ship
-        const ship = this.add.image(screenWidth/1.2, screenHeight/12, "Ship").setOrigin(0).setScale(screenWidth / (319 * 8), screenHeight / (1091 * 1.25))
+        const ship = this.add.image(screenWidth/1.2, 2*screenHeight/12, "Ship").setOrigin(0).setScale(screenWidth / (319 * 8), screenHeight / (1091 * 1.25))
         .setInteractive();
         this.assets.ship = ship;
         this.setFader(ship);
 
         //Sign
-        const  sign = this.add.image(4.25 * screenWidth/7, 1/2 * screenHeight, "Sign").setOrigin(0).setScale(screenWidth / (319 * 5), screenHeight / (189 * 8))
+        const  sign = this.add.image(4.25 * screenWidth/7, 1/2 * screenHeight, "Sign").setOrigin(0).setScale(screenWidth / (319 * 5), screenHeight / (189 * 6))
         .setInteractive();
         this.assets.sign = sign;
         this.setFader(sign);
@@ -101,8 +102,14 @@ class Port extends Phaser.Scene {
         sign.on("pointerdown", function(pointer) {
             this.scene.scene.start("WorldMap");
         })
+        const signTextStyle = { font: "18px Arial", wordWrap: true, wordWrapWidth: sign.width, align: "center" };
+        const text = this.add.text(4.35 * screenWidth/7, 6.5/12 * screenHeight, "SET SAIL", signTextStyle);
+        this.assets.text = text;
 
-        const text = this.add.text(4.35 * screenWidth/7, 6.5/12 * screenHeight, "SET SAIL");
+        //Scroll
+        const scroll = this.add.image(5.25 * screenWidth/7, 1/20 * screenHeight, "Scroll").setOrigin(0).setScale(screenWidth / (561 * 4), screenHeight / (400 * 12));
+        const scrollTextStyle = { font: "18px Arial", fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
+        const textTwo = this.add.text(5.45 * screenWidth/7, 1/14 * screenHeight, "PlaceholderText, Day 322", scrollTextStyle);
     }
 
     update() {
