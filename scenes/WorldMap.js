@@ -27,14 +27,15 @@ class WorldMap extends Phaser.Scene {
         this.add.image(0, 0, 'gameMap').setOrigin(0).setScale( screenWidth / 1326, screenHeight / 1013);
     
         var gameMapEvent = this.add.image(0, 0, 'gameMap').setOrigin(0).setScale( screenWidth / 1326, screenHeight / 1013).setInteractive().on('pointerdown', function (pointer) {
-            if ((pointer.x < 95 && pointer.y < 240) && (pointer.y > 200)) {
+            console.log(pointer.x)
+            console.log(pointer.y)
+            if ((pointer.x < screenWidth/980*75 && pointer.y < screenHeight/816*338) && (pointer.y > screenHeight/816*297)) {
                 currentLocation = getLocation();
                 futureLocation = 1;
                 console.log(currentLocation, futureLocation)
                 distance = calculateDistance(currentLocation, futureLocation);
                 moveToPlace(distance);
                 setLocation(1);
-
                 this.scene.scene.start("Port") //1. Cidade
                 
             } else if ((pointer.x < screenWidth/980*437 && pointer.y < screenHeight/816*460) && (pointer.x > screenWidth/980*360 && pointer.y > screenHeight/816*437)) {
@@ -53,22 +54,23 @@ class WorldMap extends Phaser.Scene {
                 moveToPlace(distance);
                 setLocation(3);
                 this.scene.scene.start("Port") //3. Socotra
-            } else if ((pointer.x < screenWidth/980*660 && pointer.y < screenHeight/816*340) && (pointer.x > screenWidth/980*614 && pointer.y > screenHeight/816*312)) {
+            } else if ((pointer.x < screenWidth/980*670 && pointer.y < screenHeight/816*368) && (pointer.x > screenWidth/980*610 && pointer.y > screenHeight/816*345)) {
                 currentLocation = getLocation();
                 futureLocation = 4;
                 console.log(currentLocation, futureLocation)
                 distance = calculateDistance(currentLocation, futureLocation);
                 moveToPlace(distance);
                 setLocation(4);
-                this.scene.scene.start("Port") //4. Goa
-            } else if ((pointer.x < screenWidth/980*670 && pointer.y < screenHeight/816*368) && (pointer.x > screenWidth/980*610 && pointer.y > screenHeight/816*345)) {
+                this.scene.scene.start("Port") //4. Calicut
+            } else if ((pointer.x < screenWidth/980*660 && pointer.y < screenHeight/816*340) && (pointer.x > screenWidth/980*614 && pointer.y > screenHeight/816*312)) {
                 currentLocation = getLocation();
                 futureLocation = 5;
                 console.log(currentLocation, futureLocation)
                 distance = calculateDistance(currentLocation, futureLocation);
                 moveToPlace(distance);
                 setLocation(5);
-                this.scene.scene.start("Port") //5. Calicut
+                this.scene.scene.start("Port") //5. Goa
+
             } else if ((pointer.x < screenWidth/980*708 && pointer.y < screenHeight/816*410) && (pointer.x > screenWidth/980*656 && pointer.y > screenHeight/816*374)) {
                 currentLocation = getLocation();
                 futureLocation = 6;

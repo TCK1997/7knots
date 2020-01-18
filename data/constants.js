@@ -431,7 +431,7 @@ function toName(id) {
       res = "Lisbon";
       break;
     case 1:
-      res = "CidadeVilha";
+      res = "CidadeVelha";
       break;
     case 2:
       res = "Mombasa";
