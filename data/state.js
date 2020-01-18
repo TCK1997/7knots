@@ -74,6 +74,10 @@ function getCharisma() {
   return Math.floor(sum / (currState.crew.length + 1));
 }
 
+function getMorale() {
+  return currState.morale;
+}
+
 // Setters
 
 function reset() {
@@ -161,6 +165,10 @@ function pirate() {
     currState.resources.silk = Math.floor(0.8 * currState.resources.silk);
     currState.resources.perfume = Math.floor(0.8 * currState.resources.perfume);
   }
+}
+
+function scurvy() {
+  removeCrew();
 }
 
 // Port Events

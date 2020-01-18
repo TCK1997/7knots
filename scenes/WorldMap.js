@@ -130,21 +130,14 @@ class WorldMap extends Phaser.Scene {
             backEvent.setAlpha(1);
         })
 
-        //Top Bar, Date
-        const scroll = this.add.image(5.25 * screenWidth/7, 1/20 * screenHeight, "Scroll").setOrigin(0).setScale(screenWidth / (561 * 4), screenHeight / (400 * 12));
-        const scrollTextStyle = { font: "18px Arial", fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
-        const textTwo = this.add.text(5.45 * screenWidth/7, 1/14 * screenHeight, "PlaceholderText, Day 322", scrollTextStyle);
-
         //Compass
         this.add.image(screenWidth*0.93, screenHeight*0.85, "compass").setScale(0.5)
 
+        
         //ETA
         this.add.image(screenWidth*0.73, screenHeight*0.858, "pirateScroll").setScale(0.6)
 
-        var font = { font: '18px Arial', fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
-
-        var text = this.add.text(screenWidth/1150*738, screenHeight/555*464, "Estimated Date to Arrival", font)
-
+        
         //Morale Bar
         this.add.image(screenWidth*0.45, screenHeight*0.858, "pirateScroll").setScale(0.6)
 
@@ -155,5 +148,18 @@ class WorldMap extends Phaser.Scene {
     }
     
     update() {
+
+        //Top Bar, Date
+        const scroll = this.add.image(5.25 * screenWidth/7, 1/20 * screenHeight, "Scroll").setOrigin(0).setScale(screenWidth / (561 * 4), screenHeight / (400 * 12));
+        const scrollTextStyle = { font: "18px Arial", fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
+        const textTwo = this.add.text(5.45 * screenWidth/7, 1/14 * screenHeight, toName(getLocation()) + ", Day " + getDay(), scrollTextStyle);
+        
+        
+        //ETA text
+        // var font = { font: '18px Arial', fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
+        const etaText = this.add.text(screenWidth/1150*738, screenHeight/555*464, "Estimated Date to Arrival", scrollTextStyle)
+
+        //Morale text
+        const moraleText = this.add.text(screenWidth/1130*420, screenHeight/555*464, "Morale: " + getMorale() + "% / 100%", scrollTextStyle)
     }
 }
