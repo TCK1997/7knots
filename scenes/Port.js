@@ -25,6 +25,7 @@ class Port extends Phaser.Scene {
   }
 
   openTable(id, category) {
+    addDay(1);
     let deleteArr = [];
 
     const scroll = this.add.image((1 * screenWidth) / 4, (1 / 10) * screenHeight, "Scroll")
@@ -233,6 +234,9 @@ class Port extends Phaser.Scene {
     );
     this.assets.text = text;
 
+  }
+
+  update() {
     //Scroll
     const scroll = this.add
       .image((5.25 * screenWidth) / 7, (1 / 20) * screenHeight, "Scroll")
@@ -252,6 +256,4 @@ class Port extends Phaser.Scene {
       scrollTextStyle
     );
   }
-
-  update() {}
 }
