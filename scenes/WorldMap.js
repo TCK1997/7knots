@@ -141,9 +141,9 @@ class WorldMap extends Phaser.Scene {
         //Morale Bar
         this.add.image(screenWidth*0.45, screenHeight*0.858, "pirateScroll").setScale(0.6)
 
-        var font = { font: '18px Arial', fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
+        //var font = { font: '18px Arial', fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
 
-        var text = this.add.text(screenWidth/1150*420, screenHeight/555*464, "Morale: 1700/3000", font)
+        //var text = this.add.text(screenWidth/1150*420, screenHeight/555*464, "Morale: 1700/3000", font)
 
     }
     
