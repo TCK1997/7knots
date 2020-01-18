@@ -494,14 +494,14 @@ function getCrewMember(id) {
 
 function getPrice(id, resource) {
   const demandModifier = cities[toName(id)]["demand"][resource];
-  const economyState = currState.getEconomyState();
+  const economyState = getEconomyState();
   const charismaModifier = charismaModifiers[getCharisma()];
-  let buyingPrice =
+  let buyingPrice = Math.floor(
     randInt(resourcePrices[resource][0], resourcePrices[resource][1]) *
     demandModifier *
     charismaModifier *
-    economyState;
-  let sellingPrice = (buyingPrice * randInt(12, 14)) / 10 / charismaModifier;
+    economyState);
+  let sellingPrice = Math.floor((buyingPrice * randInt(12, 14)) / 10 / charismaModifier);
   return [buyingPrice, sellingPrice];
 }
 
