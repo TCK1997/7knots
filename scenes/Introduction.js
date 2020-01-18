@@ -5,13 +5,14 @@ class Introduction extends Phaser.Scene {
 
     preload() {
         this.load.image('backBtn', '../assets/buttons/backBtn.png')
+        this.load.image('nextBtn', '../assets/buttons/nextBtn.png')
     }
     
     create() {
 
         var font = { font: '24px Arial' };
 
-        var text = this.add.text(60, 60, "INTRODUCTION STARTS HERE", font)
+        var text = this.add.text(60, 60, "Born to a family of successful sailors, your childhood was ", font)
 
         //Back button
         var backEvent = this.add.image(screenWidth*0.1, screenHeight*0.85, "backBtn", font).setInteractive().on('pointerdown', function (pointer) {
@@ -24,6 +25,19 @@ class Introduction extends Phaser.Scene {
 
         backEvent.on('pointerout',function(pointer){
             backEvent.setAlpha(1);
+        })
+
+        //Next button
+        var nextEvent = this.add.image(screenWidth*0.8, screenHeight*0.85, "nextBtn", font).setInteractive().on('pointerdown', function (pointer) {
+            this.scene.scene.start("Introduction")
+        })
+
+        nextEvent.on('pointerover',function(pointer){
+            nextEvent.setAlpha(0.75);
+        })
+
+        nextEvent.on('pointerout',function(pointer){
+            nextEvent.setAlpha(1);
         })
         
     }

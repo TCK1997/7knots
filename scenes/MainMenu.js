@@ -37,6 +37,7 @@ class MainMenu extends Phaser.Scene {
         //Continue button
         var continueEvent = this.add.image(screenWidth*0.8, screenHeight*0.44, "continueBtn", font).setInteractive().on('pointerdown', function (pointer) {
             //Load saved game, continue from previous save
+            this.scene.scene.start("Map");
         })
 
         continueEvent.on('pointerover',function(pointer){
