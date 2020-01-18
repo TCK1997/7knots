@@ -1,6 +1,8 @@
-class Map extends Phaser.Scene {
+class WorldMap extends Phaser.Scene {
+    
     constructor() {
-        super("Map");
+        super("WorldMap");
+        
     }
 
     preload() {
@@ -10,6 +12,8 @@ class Map extends Phaser.Scene {
     }
     
     create() {
+        // text1 = this.add.text(10, 10, '', { fill: '#00ff00' });
+        // this.input.mouse.disableContextMenu();
 
         this.add.image(0, 0, 'gameMap').setOrigin(0).setScale( screenWidth / 1326, screenHeight / 1013);
 
@@ -60,6 +64,10 @@ class Map extends Phaser.Scene {
     }
     
     update() {
-    
+        // var pointer = this.input.activePointer;
+        // text1.setText([
+        //     'x: ' + pointer.worldX,
+        //     'y: ' + pointer.worldY
+        // ]);
     }
 }
