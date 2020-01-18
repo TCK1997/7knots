@@ -3,6 +3,8 @@ var path;
 var pathSize;
 var graphics;
 var size;
+var move;
+var change;
 class WorldMap extends Phaser.Scene {
     
     constructor() {
@@ -22,10 +24,9 @@ class WorldMap extends Phaser.Scene {
         var currentLocation;
         var futureLocation;
         var distance;
-        curve = new Phaser.Curves.Line(new Phaser.Math.Vector2(160, 91), new Phaser.Math.Vector2(1726, 286));
-
+        
         this.add.image(0, 0, 'gameMap').setOrigin(0).setScale( screenWidth / 1326, screenHeight / 1013);
-    
+
         var gameMapEvent = this.add.image(0, 0, 'gameMap').setOrigin(0).setScale( screenWidth / 1326, screenHeight / 1013).setInteractive().on('pointerdown', function (pointer) {
             console.log(pointer.x)
             console.log(pointer.y)
@@ -37,7 +38,6 @@ class WorldMap extends Phaser.Scene {
                 moveToPlace(distance);
                 setLocation(1);
                 this.scene.scene.start("Port") //1. Cidade
-                
             } else if ((pointer.x < screenWidth/980*437 && pointer.y < screenHeight/816*460) && (pointer.x > screenWidth/980*360 && pointer.y > screenHeight/816*437)) {
                 currentLocation = getLocation();
                 futureLocation = 2;
@@ -112,7 +112,10 @@ class WorldMap extends Phaser.Scene {
                 setLocation(0);
                 this.scene.scene.start("Port") //0. Lisbon
             }
+            
+            
         })
+
 
         //Back button
         var backEvent = this.add.image(screenWidth*0.08, screenHeight*0.92, "backBtn").setInteractive().on('pointerdown', function (pointer) {
@@ -149,42 +152,8 @@ class WorldMap extends Phaser.Scene {
 
         var text = this.add.text(screenWidth/1150*420, screenHeight/555*464, "Morale: 1700/3000", font)
 
-
-
-        //Animation for ship travel
-        graphics = this.add.graphics();
-
-        path = { t: 0, vec: new Phaser.Math.Vector2() };
-        pathSize = { t: 0, vec: new Phaser.Math.Vector2() };
-        
-
-        this.tweens.add({
-            targets: path,
-            t: 1,
-            ease: 'Linear',
-            duration: 4000,
-            yoyo: false,
-            repeat: 0
-        });
-
-        
-        this.tweens.add({
-            targets: pathSize,
-            t: 1,
-            ease: 'Linear',
-            duration: 2000,
-            yoyo: true,
-            repeat: 0
-        })
     }
     
     update() {
-
-        graphics.clear();
-        graphics.lineStyle(1, 0xffffff, 1);
-        curve.getPoint(path.t, path.vec);
-
-        graphics.fillStyle(0xff0000, 1);
-        graphics.fillCircle(path.vec.x, path.vec.y, pathSize.t * 50 + 5);
     }
 }
