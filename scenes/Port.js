@@ -120,9 +120,12 @@ class Port extends Phaser.Scene {
     this.load.image("TreeTwo", "../assets/tree_2.png");
     this.load.image("Sign", "../assets/sign.png");
     this.load.image("Scroll", "../assets/pirateBox.png");
+    this.load.image("pirateScroll", "../assets/pirateScroll.png");
   }
 
   create() {
+    // portNameAPI = toName(getLocation);
+
     const _this = this;
 
     //Sand bg
@@ -277,5 +280,7 @@ class Port extends Phaser.Scene {
       toName(getLocation()) + ", Day " + getDay() + ", Gold " + getGold(),
       scrollTextStyle
     );
+
   }
+
 }

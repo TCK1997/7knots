@@ -54,7 +54,7 @@ const cities = {
   },
   CidadeVelha: {
     name: "Cidade Velha",
-    coord: [15, 381],
+    coords: [15, 381],
     resources: ["gold"],
     culture: "PT",
     demand: {
@@ -431,7 +431,7 @@ function toName(id) {
       res = "Lisbon";
       break;
     case 1:
-      res = "CidadeVilha";
+      res = "CidadeVelha";
       break;
     case 2:
       res = "Mombasa";
