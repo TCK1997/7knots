@@ -5,18 +5,6 @@ class Port extends Phaser.Scene {
     this.faded = false;
   }
 
-  setFader(x) {
-    let _this = this;
-    x.on("pointerdown", function(pointer) {
-      _this.faded = !_this.faded;
-      if (_this.faded) {
-        _this.fadeAssets(0.5);
-      } else {
-        _this.fadeAssets(1);
-      }
-    });
-  }
-
   fadeAssets(x) {
     for (let value of Object.values(this.assets)) {
       value.setAlpha(x);
@@ -29,7 +17,7 @@ class Port extends Phaser.Scene {
       _this.faded = !_this.faded;
       if (_this.faded) {
         _this.fadeAssets(0.5);
-        _this.openTable(x, "marketplace");
+        _this.openTable(x, category);
       } else {
         _this.fadeAssets(1);
       }
@@ -37,14 +25,38 @@ class Port extends Phaser.Scene {
   }
 
   openTable(id, category) {
+    addDay(1);
+    let deleteArr = [];
+
     const scroll = this.add.image((1 * screenWidth) / 4, (1 / 10) * screenHeight, "Scroll")
     .setOrigin(0)
     .setScale(screenWidth / (561*2), screenHeight / (400 * 1.2));
 
+    const close = this.add.image((1 * screenWidth) / 4, (1 / 10) * screenHeight, "Sign")
+    .setOrigin(0)
+    .setScale(screenWidth / (319 * 5), screenHeight / (189 * 6))
+    .setInteractive();
+
+    deleteArr.push(close);
+
+    let _this = this;
+    close.on("pointerdown", function(pointer) {
+      deleteArr.map(v => v.destroy());
+      scroll.destroy();
+      _this.faded = !_this.faded;
+      _this.fadeAssets(1);
+    });
+
+    const ListTextStyle = {
+      font: "18px Arial",
+      fill: "#000",
+      wordWrap: true,
+      wordWrapWidth: scroll.width,
+      align: "center"
+    };
+
     let arr;
     id = currState.location;
-
-    let deleteArr = [];
 
     switch(category) {
       case "marketplace":
@@ -56,23 +68,21 @@ class Port extends Phaser.Scene {
         }
 
         for (let j = 0; j < resourcePriceArr.length; j++) {
-          const ListTextStyle = {
-            font: "18px Arial",
-            fill: "#000",
-            wordWrap: true,
-            wordWrapWidth: scroll.width,
-            align: "center"
-          };
-
           deleteArr.push(this.add.text((1 * screenWidth) / 3,  (2 * j / 15) * screenHeight + (screenHeight/4), resourcePriceArr[j] , ListTextStyle));
         }
         break;
-    }
 
-    setTimeout(function() { 
-      deleteArr.map(v => v.destroy());
-      scroll.destroy();
-    }, 3000);
+        case "ship":
+          const navigation = getNavigation();
+          const charisma = getCharisma();
+          const motivation = getMotivation();
+          arr = getCrew();
+
+          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (0 / 15) * screenHeight + (screenHeight/4), "Average Navigation (/5): " + navigation, ListTextStyle));
+          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (1 / 15) * screenHeight + (screenHeight/4), "Average Charisma (/5): " + charisma, ListTextStyle));
+          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (2 / 15) * screenHeight + (screenHeight/4), "Average Motivation (/5): " + motivation, ListTextStyle));
+
+    }
   }
 
   preload() {
@@ -227,6 +237,9 @@ class Port extends Phaser.Scene {
     );
     this.assets.text = text;
 
+  }
+
+  update() {
     //Scroll
     const scroll = this.add
       .image((5.25 * screenWidth) / 7, (1 / 20) * screenHeight, "Scroll")
@@ -248,6 +261,4 @@ class Port extends Phaser.Scene {
 
   }
 
-
-  update() {}
 }
