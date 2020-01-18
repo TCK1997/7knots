@@ -1,3 +1,8 @@
+var curve;
+var path;
+var pathSize;
+var graphics;
+var size;
 class WorldMap extends Phaser.Scene {
     
     constructor() {
@@ -9,14 +14,14 @@ class WorldMap extends Phaser.Scene {
         this.load.image('gameMap', '../assets/gameMap.png')
         this.load.image('backBtn', '../assets/buttons/backBtn.png')
         this.load.image('nextBtn', '../assets/buttons/nextBtn.png')
+        this.load.image('caravel', '../assets/caravel.png')
     }
     
     create() {
-        // text1 = this.add.text(10, 10, '', { fill: '#00ff00' });
-        // this.input.mouse.disableContextMenu();
+        curve = new Phaser.Curves.Line(new Phaser.Math.Vector2(160, 91), new Phaser.Math.Vector2(1726, 286));
 
         this.add.image(0, 0, 'gameMap').setOrigin(0).setScale( screenWidth / 1326, screenHeight / 1013);
-
+    
         var font = { font: '24px Arial' };
 
         var text = this.add.text(60, 60, "Map here", font)
@@ -61,13 +66,40 @@ class WorldMap extends Phaser.Scene {
         // //  Using an object to define a different radius per corner
         // graphics.fillRoundedRect(360, 240, 400, 300, { tl: 64, tr: 22, bl: 12, br: 0 });
 
+        graphics = this.add.graphics();
+
+        path = { t: 0, vec: new Phaser.Math.Vector2() };
+        pathSize = { t: 0, vec: new Phaser.Math.Vector2() };
+        
+
+        this.tweens.add({
+            targets: path,
+            t: 1,
+            ease: 'Linear',
+            duration: 4000,
+            yoyo: false,
+            repeat: 0
+        });
+
+        
+        this.tweens.add({
+            targets: pathSize,
+            t: 1,
+            ease: 'Linear',
+            duration: 2000,
+            yoyo: true,
+            repeat: 0
+        })
     }
     
     update() {
-        // var pointer = this.input.activePointer;
-        // text1.setText([
-        //     'x: ' + pointer.worldX,
-        //     'y: ' + pointer.worldY
-        // ]);
+
+        graphics.clear();
+        graphics.lineStyle(1, 0xffffff, 1);
+        curve.getPoint(path.t, path.vec);
+
+        graphics.fillStyle(0xff0000, 1);
+        graphics.fillCircle(path.vec.x, path.vec.y, pathSize.t * 50 + 5);
+    
     }
 }
