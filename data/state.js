@@ -74,6 +74,10 @@ function getCharisma() {
   return Math.floor(sum / (currState.crew.length + 1));
 }
 
+function getMorale() {
+  return currState.morale;
+}
+
 // Setters
 
 function reset() {
