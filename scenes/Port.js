@@ -31,7 +31,10 @@ class Port extends Phaser.Scene {
         this.load.image("Cart", '../assets/cart.png');
         this.load.image("Stall", '../assets/stall.png');
         this.load.image("Ship", '../assets/ship2.png');
-        this.load.image("Sea", '../assets/sky.png');
+        this.load.image("Sea", '../assets/sea.png');
+        this.load.image("TreeOne", '../assets/tree_1.png');
+        this.load.image("TreeTwo", '../assets/tree_2.png');
+        this.load.image("Sign", '../assets/sign.png');
     }
 
     create() {
@@ -43,7 +46,7 @@ class Port extends Phaser.Scene {
         this.setFader(sand);
 
         //Sea
-        const sea = this.add.image(screenWidth, 0, "Sea").setOrigin(0).setRotation(Math.PI/2).setScale((screenWidth / (264 * 6)) , screenHeight / (324 * 3.75));
+        const sea = this.add.image(3 * screenWidth / 4, 0, "Sea").setOrigin(0).setScale((screenWidth / (264 * 8)) , screenHeight / (324 * 2));
         this.assets.sea = sea;
         
         //Docks
@@ -58,8 +61,11 @@ class Port extends Phaser.Scene {
 
         let dockFour = this.add.image(3 * screenWidth / 4, 0 + (325 * screenHeight / (324 * 4) * 3), "Dock").setOrigin(0).setScale((screenWidth / (264 * 14)) , screenHeight / (324 * 4));
         this.assets.dockFour = dockFour;
-        
-  
+
+        //Trees
+        const treeOne = this.add.image(4 * screenWidth/7, screenHeight/12, "TreeOne").setOrigin(0).setScale(screenWidth / (355 * 10), screenHeight / (620 * 4));
+        const treeTwo = this.add.image(3 * screenWidth/7, 8 * screenHeight/12, "TreeTwo").setOrigin(0).setScale(screenWidth / (355 * 10), screenHeight / (620 * 4));
+
         //Marketplace
         const marketplace = this.add.image(screenWidth/14, screenHeight/12, "Marketplace").setOrigin(0).setScale(screenWidth / (843 * 4), screenHeight / (766 * 3))
         .setInteractive();
@@ -85,6 +91,18 @@ class Port extends Phaser.Scene {
         .setInteractive();
         this.assets.ship = ship;
         this.setFader(ship);
+
+        //Sign
+        const  sign = this.add.image(4.25 * screenWidth/7, 1/2 * screenHeight, "Sign").setOrigin(0).setScale(screenWidth / (319 * 5), screenHeight / (189 * 8))
+        .setInteractive();
+        this.assets.sign = sign;
+        this.setFader(sign);
+
+        sign.on("pointerdown", function(pointer) {
+            this.scene.scene.start("WorldMap");
+        })
+
+        const text = this.add.text(4.35 * screenWidth/7, 6.5/12 * screenHeight, "SET SAIL");
     }
 
     update() {
