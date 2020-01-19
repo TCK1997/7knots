@@ -24,10 +24,10 @@ class WorldMap extends Phaser.Scene {
             if(getMorale() < 50 - (getMotivation() * 6)) {
                 removeCrew();
             }
-            if(getMorale() < (100 - (getMotivation() * 6))) {
+            else if(getMorale() < (40 - (getMotivation() * 6))) {
                 this.scene.start("GameOver")
             }
-            if (days > 0){
+            else if (days > 0){
                 this.scene.start("SeaEvent")
             } else {
                 loop = 0;

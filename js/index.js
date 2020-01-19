@@ -5,7 +5,7 @@ var config = {
         type: Phaser.AUTO,
         width: screenWidth,
         height: screenHeight,
-        scene: [GameOver, Port, MainMenu, Introduction, WorldMap, SeaEvent]
+        scene: [MainMenu, Introduction, Port, WorldMap, SeaEvent, GameOver]
     };
 
 var game = new Phaser.Game(config);
