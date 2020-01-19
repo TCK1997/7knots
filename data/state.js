@@ -81,6 +81,8 @@ function getMorale() {
 // Setters
 
 function reset() {
+  days = 0;
+  loop = 1;
   currState.day = 0;
   currState.gold = 300;
   currState.location = 0;
