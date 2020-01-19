@@ -2,9 +2,8 @@ var curve;
 var path;
 var pathSize;
 var graphics;
-var size;
-var move;
-var change;
+var loop = 0;
+
 class WorldMap extends Phaser.Scene {
     
     constructor() {
@@ -21,9 +20,20 @@ class WorldMap extends Phaser.Scene {
     }
     
     create() {
+        if (loop) {
+            if(getMorale() < (50 - (getMotivation() * 6))) {
+                this.scene.start("GameOver")
+            }
+            else if (days > 0){
+                this.scene.start("SeaEvent")
+            } else {
+                loop = 0;
+                this.scene.start("Port")
+            }
+        }
+        
         var currentLocation;
         var futureLocation;
-        var distance;
         
         this.add.image(0, 0, 'gameMap').setOrigin(0).setScale( screenWidth / 1326, screenHeight / 1013);
 
@@ -34,86 +44,85 @@ class WorldMap extends Phaser.Scene {
                 currentLocation = getLocation();
                 futureLocation = 1;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
+                console.log(days);
                 setLocation(1);
-                this.scene.scene.start("Port") //1. Cidade
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //1. Cidade
             } else if ((pointer.x < screenWidth/980*437 && pointer.y < screenHeight/816*460) && (pointer.x > screenWidth/980*360 && pointer.y > screenHeight/816*437)) {
                 currentLocation = getLocation();
                 futureLocation = 2;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(2);
-                this.scene.scene.start("Port") //2. Mombasa
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //2. Mombasa
             } else if ((pointer.x < screenWidth/980*567 && pointer.y < screenHeight/816*343) && (pointer.x > screenWidth/980*500 && pointer.y > screenHeight/816*322)) {
                 currentLocation = getLocation();
                 futureLocation = 3;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(3);
-                this.scene.scene.start("Port") //3. Socotra
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //3. Socotra
             } else if ((pointer.x < screenWidth/980*670 && pointer.y < screenHeight/816*368) && (pointer.x > screenWidth/980*610 && pointer.y > screenHeight/816*345)) {
                 currentLocation = getLocation();
                 futureLocation = 4;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(4);
-                this.scene.scene.start("Port") //4. Calicut
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //4. Calicut
             } else if ((pointer.x < screenWidth/980*660 && pointer.y < screenHeight/816*340) && (pointer.x > screenWidth/980*614 && pointer.y > screenHeight/816*312)) {
                 currentLocation = getLocation();
                 futureLocation = 5;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(5);
-                this.scene.scene.start("Port") //5. Goa
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //5. Goa
 
             } else if ((pointer.x < screenWidth/980*708 && pointer.y < screenHeight/816*410) && (pointer.x > screenWidth/980*656 && pointer.y > screenHeight/816*374)) {
                 currentLocation = getLocation();
                 futureLocation = 6;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(6);
-                this.scene.scene.start("Port") //6. Colombo
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //6. Colombo
             } else if ((pointer.x < screenWidth/980*890 && pointer.y < screenHeight/816*424) && (pointer.x > screenWidth/980*824 && pointer.y > screenHeight/816*406)) {
                 currentLocation = getLocation();
                 futureLocation = 7;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(7);
-                this.scene.scene.start("Port") //7. Malacca
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //7. Malacca
             } else if ((pointer.x < screenWidth/980*974 && pointer.y < screenHeight/816*513) && (pointer.x > screenWidth/980*916 && pointer.y > screenHeight/816*479)) {
                 currentLocation = getLocation();
                 futureLocation = 8;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(8);
-                this.scene.scene.start("Port") //8. Makassar
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //8. Makassar
             } else if ((pointer.x < screenWidth/980*935 && pointer.y < screenHeight/816*239) && (pointer.x > screenWidth/980*890 && pointer.y > screenHeight/816*200)) {
                 currentLocation = getLocation();
                 futureLocation = 9;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(9);
-                this.scene.scene.start("Port") //9. Canton
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //9. Canton
             } else if ((pointer.x < screenWidth/980*130 && pointer.y < screenHeight/816*85) && (pointer.x > screenWidth/980*75 && pointer.y > screenHeight/816*67)) {
                 currentLocation = getLocation();
                 futureLocation = 0;
                 console.log(currentLocation, futureLocation)
-                distance = calculateDistance(currentLocation, futureLocation);
-                moveToPlace(distance);
+                days = calculateDays(currentLocation, futureLocation);
                 setLocation(0);
-                this.scene.scene.start("Port") //0. Lisbon
+                loop = 1;
+                this.scene.scene.start("SeaEvent") //0. Lisbon
             }
-            
-            
         })
 
 

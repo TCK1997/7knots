@@ -148,6 +148,7 @@ class Port extends Phaser.Scene {
   }
 
   create() {
+    resetMorale();
     // portNameAPI = toName(getLocation);
 
     const _this = this;
