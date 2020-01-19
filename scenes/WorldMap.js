@@ -28,7 +28,11 @@ class WorldMap extends Phaser.Scene {
                 this.scene.start("SeaEvent")
             } else {
                 loop = 0;
-                this.scene.start("Port")
+                // if (returnedLisbon == true) {
+                //     this.scene.start("Win")
+                // } else if (returnedLisbon == false) {
+                    this.scene.start("Port")
+                // }
             }
         }
         
