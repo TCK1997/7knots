@@ -39,7 +39,7 @@ class Introduction extends Phaser.Scene {
       .image(screenWidth * 0.9, screenHeight * 0.92, "nextBtn", font)
       .setInteractive()
       .on("pointerdown", function(pointer) {
-        this.scene.scene.start("WorldMap");
+        this.scene.scene.start("Port");
       });
 
     nextEvent.on("pointerover", function(pointer) {
