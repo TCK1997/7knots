@@ -28,14 +28,16 @@ class Port extends Phaser.Scene {
     addDay(1);
     let deleteArr = [];
 
-    const scroll = this.add.image((1 * screenWidth) / 4, (1 / 10) * screenHeight, "Scroll")
-    .setOrigin(0)
-    .setScale(screenWidth / (561*2), screenHeight / (400 * 1.2));
+    const scroll = this.add
+      .image((1 * screenWidth) / 4, (1 / 10) * screenHeight, "Scroll")
+      .setOrigin(0)
+      .setScale(screenWidth / (561 * 2), screenHeight / (400 * 1.2));
 
-    const close = this.add.image((1 * screenWidth) / 4, (1 / 10) * screenHeight, "Sign")
-    .setOrigin(0)
-    .setScale(screenWidth / (319 * 5), screenHeight / (189 * 6))
-    .setInteractive();
+    const close = this.add
+      .image((1 * screenWidth) / 4, (1 / 10) * screenHeight, "Sign")
+      .setOrigin(0)
+      .setScale(screenWidth / (319 * 5), screenHeight / (189 * 6))
+      .setInteractive();
 
     deleteArr.push(close);
 
@@ -58,36 +60,57 @@ class Port extends Phaser.Scene {
     let arr;
     id = currState.location;
 
-    switch(category) {
+    switch (category) {
       case "marketplace":
         arr = getAllResources();
         let resourcePriceArr = ["Good" + " | " + "Buy/Sell | " + "Owned"];
         let sellPriceArr = [];
         let buyPriceArr = [];
-        
+
         for (let i = 0; i < arr.length; i++) {
           const [sellPrice, buyPrice] = getPrice(id, arr[i]);
           const owned = currState.resources[arr[i]];
           console.log(sellPrice, buyPrice);
-          resourcePriceArr.push( arr[i] + " " + sellPrice + " " + buyPrice + " " + owned);
+          resourcePriceArr.push(
+            arr[i] + " " + sellPrice + " " + buyPrice + " " + owned
+          );
           sellPriceArr.push(sellPrice);
           buyPriceArr.push(buyPrice);
         }
 
         for (let j = 0; j < resourcePriceArr.length; j++) {
-          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (j / 22) * screenHeight + (screenHeight/6), resourcePriceArr[j] , ListTextStyle));
+          deleteArr.push(
+            this.add.text(
+              (1 * screenWidth) / 3,
+              (j / 22) * screenHeight + screenHeight / 6,
+              resourcePriceArr[j],
+              ListTextStyle
+            )
+          );
         }
 
         setTimeout(() => {
-          let index = prompt("Please enter the index of the item you want to sell", 0);
-          let amtToSell = Math.min(prompt("Please enter amount you want to sell", 0), currState.resources[arr[index]]);
+          let index = prompt(
+            "Please enter the index of the item you want to sell",
+            0
+          );
+          let amtToSell = Math.min(
+            prompt("Please enter amount you want to sell", 0),
+            currState.resources[arr[index]]
+          );
           if (index != null) {
             addResource(arr[index], amtToSell);
             addGold(sellPriceArr[index] * amtToSell);
           }
 
-          let index2 = prompt("Please enter the index of the item you want to buy", 0);
-          let amtToBuy = Math.min(prompt("Please enter amount you want to buy", 0), Math.floor(getGold() / buyPriceArr[index2]));
+          let index2 = prompt(
+            "Please enter the index of the item you want to buy",
+            0
+          );
+          let amtToBuy = Math.min(
+            prompt("Please enter amount you want to buy", 0),
+            Math.floor(getGold() / buyPriceArr[index2])
+          );
           if (index2 != null) {
             addResource(arr[index2], amtToBuy);
             addGold(-buyPriceArr[index2] * amtToBuy);
@@ -95,39 +118,103 @@ class Port extends Phaser.Scene {
         }, 1000);
         break;
 
-        case "ship":
-          const navigation = getNavigation();
-          const charisma = getCharisma();
-          const motivation = getMotivation();
-          arr = getCrew();
+      case "ship":
+        const navigation = getNavigation();
+        const charisma = getCharisma();
+        const motivation = getMotivation();
+        arr = getCrew();
 
-          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (0 / 15) * screenHeight + (screenHeight/4), "Average Navigation (/5): " + navigation, ListTextStyle));
-          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (1 / 15) * screenHeight + (screenHeight/4), "Average Charisma (/5): " + charisma, ListTextStyle));
-          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (2 / 15) * screenHeight + (screenHeight/4), "Average Motivation (/5): " + motivation, ListTextStyle));
+        deleteArr.push(
+          this.add.text(
+            (1 * screenWidth) / 3,
+            (0 / 15) * screenHeight + screenHeight / 4,
+            "Average Navigation (/5): " + navigation,
+            ListTextStyle
+          )
+        );
+        deleteArr.push(
+          this.add.text(
+            (1 * screenWidth) / 3,
+            (1 / 15) * screenHeight + screenHeight / 4,
+            "Average Charisma (/5): " + charisma,
+            ListTextStyle
+          )
+        );
+        deleteArr.push(
+          this.add.text(
+            (1 * screenWidth) / 3,
+            (2 / 15) * screenHeight + screenHeight / 4,
+            "Average Motivation (/5): " + motivation,
+            ListTextStyle
+          )
+        );
 
-          for (let i = 0; i < arr.length; i++) {
-            deleteArr.push(this.add.text((1 * screenWidth) / 3,  ((3 + i) / 15) * screenHeight + (screenHeight/4), arr[i].name + " " + arr[i].navigation + "/" + arr[i].charisma + "/" + arr[i].motivation, ListTextStyle));
+        for (let i = 0; i < arr.length; i++) {
+          deleteArr.push(
+            this.add.text(
+              (1 * screenWidth) / 3,
+              ((3 + i) / 15) * screenHeight + screenHeight / 4,
+              arr[i].name +
+                " " +
+                arr[i].navigation +
+                "/" +
+                arr[i].charisma +
+                "/" +
+                arr[i].motivation,
+              ListTextStyle
+            )
+          );
+        }
+        break;
+
+      case "tavern":
+        arr = [];
+        arr.push(new CrewMember(id));
+        arr.push(new CrewMember(id));
+        arr.push(new CrewMember(id));
+
+        deleteArr.push(
+          this.add.text(
+            (1 * screenWidth) / 3,
+            (1 / 15) * screenHeight + screenHeight / 4,
+            "Name | " +
+              " Navigation/" +
+              "Charisma/" +
+              "Motivation " +
+              "| Price",
+            ListTextStyle
+          )
+        );
+
+        for (let i = 0; i < arr.length; i++) {
+          deleteArr.push(
+            this.add.text(
+              (1 * screenWidth) / 3,
+              ((3 + i) / 15) * screenHeight + screenHeight / 4,
+              arr[i].name +
+                " " +
+                arr[i].navigation +
+                "/" +
+                arr[i].charisma +
+                "/" +
+                arr[i].motivation +
+                " " +
+                arr[i].price,
+              ListTextStyle
+            )
+          );
+        }
+
+        setTimeout(() => {
+          let index = prompt(
+            "Please enter the index of the crewman you are hiring",
+            0
+          );
+          if (getGold() >= arr[index].price) {
+            addCrew(arr[index]);
+            addGold(-arr[index].price);
           }
-          break;
-
-          case "tavern":
-            arr = [];
-            arr.push(new CrewMember(id));
-            arr.push(new CrewMember(id));
-            arr.push(new CrewMember(id));
-
-            deleteArr.push(this.add.text((1 * screenWidth) / 3,  (1 / 15) * screenHeight + (screenHeight/4), "Name | " + " Navigation/" + "Charisma/" + "Motivation " + "| Price", ListTextStyle));
-
-            for (let i = 0; i < arr.length; i++) {
-              deleteArr.push(this.add.text((1 * screenWidth) / 3,  ((3 + i) / 15) * screenHeight + (screenHeight/4), arr[i].name + " " + arr[i].navigation + "/" + arr[i].charisma + "/" + arr[i].motivation + " " + arr[i].price, ListTextStyle));
-            }
-
-            setTimeout(() => {
-              let index = prompt("Please enter the index of the crewman you are hiring", 0);
-              if (getGold() >= arr[index].price) {
-                addCrew(arr[index]);
-                addGold(-arr[index].price);
-              }}, 1000);
+        }, 1000);
     }
   }
 
@@ -275,6 +362,8 @@ class Port extends Phaser.Scene {
     this.assets.sign = sign;
 
     sign.on("pointerdown", function(pointer) {
+      currState.economyState =
+        currState.economyState * (Math.random() * 0.4 + 0.8).toFixed(4);
       this.scene.scene.start("WorldMap");
     });
     const signTextStyle = {

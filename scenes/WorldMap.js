@@ -28,11 +28,7 @@ class WorldMap extends Phaser.Scene {
                 this.scene.start("SeaEvent")
             } else {
                 loop = 0;
-                // if (returnedLisbon == true) {
-                //     this.scene.start("Win")
-                // } else if (returnedLisbon == false) {
-                    this.scene.start("Port")
-                // }
+                this.scene.start("Port")
             }
         }
         
@@ -117,7 +113,6 @@ class WorldMap extends Phaser.Scene {
                 days = calculateDays(currentLocation, futureLocation);
                 setLocation(9);
                 loop = 1;
-                setVisitedCanton();
                 this.scene.scene.start("SeaEvent") //9. Canton
             } else if ((pointer.x < screenWidth/980*130 && pointer.y < screenHeight/816*85) && (pointer.x > screenWidth/980*75 && pointer.y > screenHeight/816*67)) {
                 currentLocation = getLocation();
@@ -126,7 +121,6 @@ class WorldMap extends Phaser.Scene {
                 days = calculateDays(currentLocation, futureLocation);
                 setLocation(0);
                 loop = 1;
-                setReturnedLisbon();
                 this.scene.scene.start("SeaEvent") //0. Lisbon
             }
         })

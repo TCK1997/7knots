@@ -24,7 +24,6 @@ let currState = {
   economyState: 1,
   morale: 100,
   visitedCanton: false,
-  returnedLisbon: false,
 };
 
 // Getters
@@ -85,6 +84,7 @@ function getMorale() {
 function reset() {
   days = 0;
   loop = 1;
+  currState.visitedCanton = false;
   currState.day = 0;
   currState.gold = 300;
   currState.location = 0;
@@ -177,13 +177,11 @@ function scurvy() {
 
 //Flags to check if reached Canton/Lisbon
 function setVisitedCanton() {
-  visitedCanton = true;
+  currState.visitedCanton = true;
 }
 
-function setReturnedLisbon() {
-  if (visitedCanton == true) {
-    returnedLisbon = true;
-  }
+function getVisitedCanton() {
+  return currState.visitedCanton;
 }
 
 // Port Events
