@@ -1,6 +1,6 @@
 // Hard-coded constants used for the game (i.e. for cities, names, resource demand and supply etc.)
 const introductionText = [
-  "Born to a family of successful sailors, your childhood was filled with seamen."
+  "1492: Columbus.\n1497: Vasco Da Gama.\n 1522: Magellan.\n\nThe Age of Exploration opened up much more than just new coastlines. Spices became more valuable than ever, with the Indian Ocean trade flourishing with the reinvigorating presence of the West. Overcoming unlikely odds, Portugal soon came to dominate long-distance trade. Born to a decently well-to-do family was Henrique, named after the famous patron of exploration Henry the Navigator.\n\n Forced to make his own way in the world by his strict, strong-willed father, Henrique sets off with nothing but a lowly caravel and a small portion of Gold. Can he prove to his father, and more importantly to himself, that he has what it takes to survive the turmoils of seafaring and make a nice profit in the process?\n\n With a sense of ambition bordering on irrational, Henrique the Little boards his ship."
 ];
 
 const demands = {
