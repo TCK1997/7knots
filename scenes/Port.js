@@ -62,14 +62,36 @@ class Port extends Phaser.Scene {
       case "marketplace":
         arr = getResources(id);
         let resourcePriceArr = ["Good" + " Buy/Sell "];
+        let sellPriceArr = [];
+        let buyPriceArr = [];
         
         for (let i = 0; i < arr.length; i++) {
-          resourcePriceArr.push( arr[i] + " " + getPrice(id, arr[i]));
+          const [sellPrice, buyPrice] = getPrice(id, arr[i]);
+          console.log(sellPrice, buyPrice);
+          resourcePriceArr.push( arr[i] + " " + sellPrice + " " + buyPrice );
+          sellPriceArr.push(sellPrice);
+          buyPriceArr.push(buyPrice);
         }
 
         for (let j = 0; j < resourcePriceArr.length; j++) {
           deleteArr.push(this.add.text((1 * screenWidth) / 3,  (2 * j / 15) * screenHeight + (screenHeight/4), resourcePriceArr[j] , ListTextStyle));
         }
+
+        setTimeout(() => {
+          let index = prompt("Please enter the index of the item you want to sell", 0);
+          let amtToSell = Math.min(prompt("Please enter amount you want to sell", 0), currState.resources[arr[index]]);
+          addResource(arr[index], amtToSell);
+          addGold(sellPriceArr[index] * amtToSell);
+  
+          let index2 = prompt("Please enter the index of the item you want to buy", 0);
+          let amtToBuy = Math.min(prompt("Please enter amount you want to buy", 0), Math.floor(getGold() / buyPriceArr[index2]));
+          console.log(index2, arr[index2], amtToBuy, id);
+          addResource(arr[index2], amtToBuy);
+          addGold(-buyPriceArr[index2] * amtToBuy);
+        }, 1000);
+
+
+
         break;
 
         case "ship":
@@ -81,7 +103,7 @@ class Port extends Phaser.Scene {
           deleteArr.push(this.add.text((1 * screenWidth) / 3,  (0 / 15) * screenHeight + (screenHeight/4), "Average Navigation (/5): " + navigation, ListTextStyle));
           deleteArr.push(this.add.text((1 * screenWidth) / 3,  (1 / 15) * screenHeight + (screenHeight/4), "Average Charisma (/5): " + charisma, ListTextStyle));
           deleteArr.push(this.add.text((1 * screenWidth) / 3,  (2 / 15) * screenHeight + (screenHeight/4), "Average Motivation (/5): " + motivation, ListTextStyle));
-
+          break;
     }
   }
 
@@ -255,7 +277,7 @@ class Port extends Phaser.Scene {
     const textTwo = this.add.text(
       (5.45 * screenWidth) / 7,
       (1 / 14) * screenHeight,
-      toName(getLocation()) + ", Day " + getDay(),
+      toName(getLocation()) + ", Day " + getDay() + ", Gold " + getGold(),
       scrollTextStyle
     );
 
