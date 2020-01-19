@@ -50,7 +50,7 @@ class WorldMap extends Phaser.Scene {
                 currentLocation = getLocation();
                 futureLocation = 3;
                 console.log(currentLocation, futureLocation)
-                this.distance = calculateDistance(currentLocation, futureLocation);
+                distance = calculateDistance(currentLocation, futureLocation);
                 moveToPlace(distance);
                 setLocation(3);
                 this.scene.scene.start("Port") //3. Socotra
