@@ -15,7 +15,7 @@ class Introduction extends Phaser.Scene {
         var text = this.add.text(60, 60, "Born to a family of successful sailors, your childhood was ", font)
 
         //Back button
-        var backEvent = this.add.image(screenWidth*0.08, screenHeight*0.92, "backBtn", font).setInteractive().on('pointerdown', function (pointer) {
+        var backEvent = this.add.image(screenWidth*0.1, screenHeight*0.85, "backBtn", font).setInteractive().on('pointerdown', function (pointer) {
             this.scene.scene.start("MainMenu")
         })
 
@@ -28,8 +28,8 @@ class Introduction extends Phaser.Scene {
         })
 
         //Next button
-        var nextEvent = this.add.image(screenWidth*0.9, screenHeight*0.92, "nextBtn", font).setInteractive().on('pointerdown', function (pointer) {
-            this.scene.scene.start("WorldMap")
+        var nextEvent = this.add.image(screenWidth*0.8, screenHeight*0.85, "nextBtn", font).setInteractive().on('pointerdown', function (pointer) {
+            this.scene.scene.start("Introduction")
         })
 
         nextEvent.on('pointerover',function(pointer){
