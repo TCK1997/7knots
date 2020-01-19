@@ -22,7 +22,9 @@ let currState = {
     perfume: 0
   },
   economyState: 1,
-  morale: 100
+  morale: 100,
+  visitedCanton: false,
+  returnedLisbon: false,
 };
 
 // Getters
@@ -81,6 +83,8 @@ function getMorale() {
 // Setters
 
 function reset() {
+  days = 0;
+  loop = 1;
   currState.day = 0;
   currState.gold = 300;
   currState.location = 0;
@@ -169,6 +173,17 @@ function pirate() {
 
 function scurvy() {
   removeCrew();
+}
+
+//Flags to check if reached Canton/Lisbon
+function setVisitedCanton() {
+  visitedCanton = true;
+}
+
+function setReturnedLisbon() {
+  if (visitedCanton == true) {
+    returnedLisbon = true;
+  }
 }
 
 // Port Events

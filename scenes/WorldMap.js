@@ -21,10 +21,7 @@ class WorldMap extends Phaser.Scene {
     
     create() {
         if (loop) {
-            if(getMorale() < 50 - (getMotivation() * 6)) {
-                removeCrew();
-            }
-            else if(getMorale() < (40 - (getMotivation() * 6))) {
+            if(getMorale() < (50 - (getMotivation() * 6))) {
                 this.scene.start("GameOver")
             }
             else if (days > 0){
@@ -116,6 +113,7 @@ class WorldMap extends Phaser.Scene {
                 days = calculateDays(currentLocation, futureLocation);
                 setLocation(9);
                 loop = 1;
+                setVisitedCanton();
                 this.scene.scene.start("SeaEvent") //9. Canton
             } else if ((pointer.x < screenWidth/980*130 && pointer.y < screenHeight/816*85) && (pointer.x > screenWidth/980*75 && pointer.y > screenHeight/816*67)) {
                 currentLocation = getLocation();
@@ -124,6 +122,7 @@ class WorldMap extends Phaser.Scene {
                 days = calculateDays(currentLocation, futureLocation);
                 setLocation(0);
                 loop = 1;
+                setReturnedLisbon();
                 this.scene.scene.start("SeaEvent") //0. Lisbon
             }
         })

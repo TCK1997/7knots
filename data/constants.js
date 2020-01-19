@@ -476,6 +476,25 @@ function getResources(id) {
   return cities[city]["resources"];
 }
 
+function getAllResources() {
+  return [
+    'cloth',
+    'wine',
+    'silver',
+    'gold',
+    'coffee',
+    'pepper',
+    'cotton',
+    'sugar',
+    'clove',
+    'nutmeg',
+    'mace',
+    'porcelain',
+    'silk',
+    'perfume'
+  ]
+}
+
 function getCulture(id) {
   const city = toName(id);
   return cities[city]["culture"];

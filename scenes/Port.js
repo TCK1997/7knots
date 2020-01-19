@@ -60,21 +60,22 @@ class Port extends Phaser.Scene {
 
     switch(category) {
       case "marketplace":
-        arr = getResources(id);
-        let resourcePriceArr = ["Good" + " | " + "Buy/Sell "];
+        arr = getAllResources();
+        let resourcePriceArr = ["Good" + " | " + "Buy/Sell | " + "Owned"];
         let sellPriceArr = [];
         let buyPriceArr = [];
         
         for (let i = 0; i < arr.length; i++) {
           const [sellPrice, buyPrice] = getPrice(id, arr[i]);
+          const owned = currState.resources[arr[i]];
           console.log(sellPrice, buyPrice);
-          resourcePriceArr.push( arr[i] + " " + sellPrice + " " + buyPrice );
+          resourcePriceArr.push( arr[i] + " " + sellPrice + " " + buyPrice + " " + owned);
           sellPriceArr.push(sellPrice);
           buyPriceArr.push(buyPrice);
         }
 
         for (let j = 0; j < resourcePriceArr.length; j++) {
-          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (2 * j / 15) * screenHeight + (screenHeight/4), resourcePriceArr[j] , ListTextStyle));
+          deleteArr.push(this.add.text((1 * screenWidth) / 3,  (j / 22) * screenHeight + (screenHeight/6), resourcePriceArr[j] , ListTextStyle));
         }
 
         setTimeout(() => {
@@ -147,6 +148,8 @@ class Port extends Phaser.Scene {
   }
 
   create() {
+    resetMorale();
+    // portNameAPI = toName(getLocation);
 
     const _this = this;
 

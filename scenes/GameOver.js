@@ -53,7 +53,7 @@ class GameOver extends Phaser.Scene {
         //Game Over text
         this.add.image(screenWidth*0.35, screenHeight*0.03, "pirateBox").setOrigin(0).setScale(0.65, 0.2);        
         var font = { font: '36px Arial', fill: "#000", wordWrap: true, wordWrapWidth: scroll.width, align: "center" };
-        var text = this.add.text(screenWidth*0.4, screenHeight*0.08, "GAME OVER", font)
+        var text = this.add.text(screenWidth*0.4, screenHeight*0.08, "GAME OVER (MUTINITY)", font)
 
 
     }
