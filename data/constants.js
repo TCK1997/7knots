@@ -531,6 +531,40 @@ function calculateDistance(a, b) {
   }
 }
 
+function stormEvent(){
+  console.log("You are in a storm");
+  addDay(7);
+  decreaseMorale(7);
+}
+
+function rollOceanEvent(){
+  return randInt(1,100);
+}
+
 function moveToPlace(distance) {
-  console.log(distance);
+  var days = distance / 500;
+  while(days > 0){
+    addDay(1);
+    event = rollOceanEvent();
+    if(63 < event < 70) {
+      stormEvent();
+    } else if (event == 62) 
+    {
+      console.log("you got scurvy haha");
+      scurvy();
+    } else if (event == 61) {
+      console.log("you got rob by a pirate");
+      pirate();
+    } else {
+      console.log("nothing happen");
+    }
+    days--;
+    if(getMorale() < (40 - 6 * getCharisma())) {
+      console.log("mutiny game over");
+    }
+  }
+  if(getMorale() < (50 - 6 * getCharisma())) {
+    console.log();
+    removeCrew();
+  } 
 }
