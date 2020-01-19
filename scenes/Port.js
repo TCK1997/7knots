@@ -149,7 +149,14 @@ class Port extends Phaser.Scene {
 
   create() {
     resetMorale();
-    // portNameAPI = toName(getLocation);
+    
+    if (getLocation() == 9) {
+      setVisitedCanton();
+    }
+
+    if (getLocation() == 0 && getVisitedCanton() == true) {
+      this.scene.start("Win");
+    } else {
 
     const _this = this;
 
@@ -283,7 +290,7 @@ class Port extends Phaser.Scene {
       signTextStyle
     );
     this.assets.text = text;
-
+    }
   }
 
   update() {
