@@ -518,53 +518,26 @@ function randInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function calculateDistance(a, b) {
+var days = 11;
+
+function calculateDays(a, b) {
   if (a == b) {
     return 0;
   } else {
     startCoords = getCoords(a);
     endCoords = getCoords(b);
-    return Math.sqrt(
+    return (Math.sqrt(
       Math.pow(startCoords[0] - endCoords[0], 2) +
         Math.pow(startCoords[1] - endCoords[1], 2)
-    );
+    ))/50;
   }
 }
 
 function stormEvent(){
-  console.log("You are in a storm");
   addDay(7);
-  decreaseMorale(7);
+  decreaseMorale(14);
 }
 
 function rollOceanEvent(){
   return randInt(1,100);
-}
-
-function moveToPlace(distance) {
-  var days = distance / 500;
-  while(days > 0){
-    addDay(1);
-    event = rollOceanEvent();
-    if(63 < event < 70) {
-      stormEvent();
-    } else if (event == 62) 
-    {
-      console.log("you got scurvy haha");
-      scurvy();
-    } else if (event == 61) {
-      console.log("you got rob by a pirate");
-      pirate();
-    } else {
-      console.log("nothing happen");
-    }
-    days--;
-    if(getMorale() < (40 - 6 * getCharisma())) {
-      console.log("mutiny game over");
-    }
-  }
-  if(getMorale() < (50 - 6 * getCharisma())) {
-    console.log();
-    removeCrew();
-  } 
 }
