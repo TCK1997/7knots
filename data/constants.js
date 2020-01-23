@@ -562,3 +562,20 @@ function stormEvent() {
 function rollOceanEvent() {
   return randInt(1, 100);
 }
+
+function generateStars(n) {
+  switch (n) {
+    case 0:
+      return " ";
+    case 1:
+      return "☆";
+    case 2:
+      return "☆☆";
+    case 3:
+      return "☆☆☆";
+    case 4:
+      return "☆☆☆☆";
+    case 5:
+      return "☆☆☆☆☆";
+  }
+}

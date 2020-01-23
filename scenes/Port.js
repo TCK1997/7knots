@@ -172,16 +172,19 @@ class Port extends Phaser.Scene {
         arr.push(new CrewMember(id));
         arr.push(new CrewMember(id));
         arr.push(new CrewMember(id));
+        arr.push(new CrewMember(id));
+        arr.push(new CrewMember(id));
+        arr.push(new CrewMember(id));
 
         deleteArr.push(
           this.add.text(
             (1 * screenWidth) / 3,
             (1 / 15) * screenHeight + screenHeight / 4,
             "Name | " +
-              " Navigation/" +
-              "Charisma/" +
-              "Motivation " +
-              "| Price",
+              " Navigation / " +
+              "Charisma / " +
+              "Motivation  " +
+              "|  Price",
             ListTextStyle
           )
         );
@@ -192,13 +195,13 @@ class Port extends Phaser.Scene {
               (1 * screenWidth) / 3,
               ((3 + i) / 15) * screenHeight + screenHeight / 4,
               arr[i].name +
-                " " +
+                " :   " +
                 arr[i].navigation +
-                "/" +
+                " / " +
                 arr[i].charisma +
-                "/" +
+                " / " +
                 arr[i].motivation +
-                " " +
+                "  |  " +
                 arr[i].price,
               ListTextStyle
             )
@@ -236,7 +239,7 @@ class Port extends Phaser.Scene {
 
   create() {
     resetMorale();
-    
+
     if (getLocation() == 9) {
       setVisitedCanton();
     }
@@ -244,141 +247,144 @@ class Port extends Phaser.Scene {
     if (getLocation() == 0 && getVisitedCanton() == true) {
       this.scene.start("Win");
     } else {
+      const _this = this;
 
-    const _this = this;
+      //Sand bg
+      const sand = this.add
+        .image(0, 0, "Sand")
+        .setOrigin(0)
+        .setScale((screenWidth / 906) * 0.8, screenHeight / 604);
+      this.assets.sand = sand;
 
-    //Sand bg
-    const sand = this.add
-      .image(0, 0, "Sand")
-      .setOrigin(0)
-      .setScale((screenWidth / 906) * 0.8, screenHeight / 604);
-    this.assets.sand = sand;
+      //Sea
+      const sea = this.add
+        .image((3 * screenWidth) / 4, 0, "Sea")
+        .setOrigin(0)
+        .setScale(screenWidth / (264 * 8), screenHeight / (324 * 2));
+      this.assets.sea = sea;
 
-    //Sea
-    const sea = this.add
-      .image((3 * screenWidth) / 4, 0, "Sea")
-      .setOrigin(0)
-      .setScale(screenWidth / (264 * 8), screenHeight / (324 * 2));
-    this.assets.sea = sea;
+      //Docks
+      let dockOne = this.add
+        .image(
+          (3 * screenWidth) / 4,
+          0 + ((325 * screenHeight) / (324 * 4)) * 0,
+          "Dock"
+        )
+        .setOrigin(0)
+        .setScale(screenWidth / (264 * 14), screenHeight / (324 * 4));
+      this.assets.dockOne = dockOne;
 
-    //Docks
-    let dockOne = this.add
-      .image(
-        (3 * screenWidth) / 4,
-        0 + ((325 * screenHeight) / (324 * 4)) * 0,
-        "Dock"
-      )
-      .setOrigin(0)
-      .setScale(screenWidth / (264 * 14), screenHeight / (324 * 4));
-    this.assets.dockOne = dockOne;
+      let dockTwo = this.add
+        .image(
+          (3 * screenWidth) / 4,
+          0 + ((325 * screenHeight) / (324 * 4)) * 1,
+          "Dock"
+        )
+        .setOrigin(0)
+        .setScale(screenWidth / (264 * 14), screenHeight / (324 * 4));
+      this.assets.dockTwo = dockTwo;
 
-    let dockTwo = this.add
-      .image(
-        (3 * screenWidth) / 4,
-        0 + ((325 * screenHeight) / (324 * 4)) * 1,
-        "Dock"
-      )
-      .setOrigin(0)
-      .setScale(screenWidth / (264 * 14), screenHeight / (324 * 4));
-    this.assets.dockTwo = dockTwo;
+      let dockThree = this.add
+        .image(
+          (3 * screenWidth) / 4,
+          0 + ((325 * screenHeight) / (324 * 4)) * 2,
+          "Dock"
+        )
+        .setOrigin(0)
+        .setScale(screenWidth / (264 * 14), screenHeight / (324 * 4));
+      this.assets.dockThree = dockThree;
 
-    let dockThree = this.add
-      .image(
-        (3 * screenWidth) / 4,
-        0 + ((325 * screenHeight) / (324 * 4)) * 2,
-        "Dock"
-      )
-      .setOrigin(0)
-      .setScale(screenWidth / (264 * 14), screenHeight / (324 * 4));
-    this.assets.dockThree = dockThree;
+      let dockFour = this.add
+        .image(
+          (3 * screenWidth) / 4,
+          0 + ((325 * screenHeight) / (324 * 4)) * 3,
+          "Dock"
+        )
+        .setOrigin(0)
+        .setScale(screenWidth / (264 * 14), screenHeight / (324 * 4));
+      this.assets.dockFour = dockFour;
 
-    let dockFour = this.add
-      .image(
-        (3 * screenWidth) / 4,
-        0 + ((325 * screenHeight) / (324 * 4)) * 3,
-        "Dock"
-      )
-      .setOrigin(0)
-      .setScale(screenWidth / (264 * 14), screenHeight / (324 * 4));
-    this.assets.dockFour = dockFour;
+      //Trees
+      const treeOne = this.add
+        .image((4 * screenWidth) / 7, screenHeight / 12, "TreeOne")
+        .setOrigin(0)
+        .setScale(screenWidth / (355 * 10), screenHeight / (620 * 4));
+      const treeTwo = this.add
+        .image((3 * screenWidth) / 7, (8 * screenHeight) / 12, "TreeTwo")
+        .setOrigin(0)
+        .setScale(screenWidth / (355 * 10), screenHeight / (620 * 4));
 
-    //Trees
-    const treeOne = this.add
-      .image((4 * screenWidth) / 7, screenHeight / 12, "TreeOne")
-      .setOrigin(0)
-      .setScale(screenWidth / (355 * 10), screenHeight / (620 * 4));
-    const treeTwo = this.add
-      .image((3 * screenWidth) / 7, (8 * screenHeight) / 12, "TreeTwo")
-      .setOrigin(0)
-      .setScale(screenWidth / (355 * 10), screenHeight / (620 * 4));
+      //Marketplace
+      const marketplace = this.add
+        .image(screenWidth / 14, screenHeight / 12, "Marketplace")
+        .setOrigin(0)
+        .setScale(screenWidth / (843 * 4), screenHeight / (766 * 3))
+        .setInteractive();
+      this.assets.marketplace = marketplace;
+      this.setFader(marketplace, "marketplace");
 
-    //Marketplace
-    const marketplace = this.add
-      .image(screenWidth / 14, screenHeight / 12, "Marketplace")
-      .setOrigin(0)
-      .setScale(screenWidth / (843 * 4), screenHeight / (766 * 3))
-      .setInteractive();
-    this.assets.marketplace = marketplace;
-    this.setFader(marketplace, "marketplace");
+      //Tavern
+      const tavern = this.add
+        .image(screenWidth / 10, screenHeight / 1.5, "Tavern")
+        .setOrigin(0)
+        .setScale(screenWidth / (695 * 4), screenHeight / (598 * 4))
+        .setInteractive();
+      this.assets.tavern = tavern;
+      this.setFader(tavern, "tavern");
 
-    //Tavern
-    const tavern = this.add
-      .image(screenWidth / 10, screenHeight / 1.5, "Tavern")
-      .setOrigin(0)
-      .setScale(screenWidth / (695 * 4), screenHeight / (598 * 4))
-      .setInteractive();
-    this.assets.tavern = tavern;
-    this.setFader(tavern, "tavern");
+      //Cart
+      const cart = this.add
+        .image(screenWidth / 12, screenHeight / 2.25, "Cart")
+        .setOrigin(0)
+        .setScale(screenWidth / (265 * 8), screenHeight / (171 * 8));
+      this.assets.cart = cart;
 
-    //Cart
-    const cart = this.add
-      .image(screenWidth / 12, screenHeight / 2.25, "Cart")
-      .setOrigin(0)
-      .setScale(screenWidth / (265 * 8), screenHeight / (171 * 8));
-    this.assets.cart = cart;
+      //Stall
+      const stall = this.add
+        .image(screenWidth / 3.2, screenHeight / 3, "Stall")
+        .setOrigin(0)
+        .setScale(screenWidth / (219 * 8), screenHeight / (145 * 8));
+      this.assets.stall = stall;
 
-    //Stall
-    const stall = this.add
-      .image(screenWidth / 3.2, screenHeight / 3, "Stall")
-      .setOrigin(0)
-      .setScale(screenWidth / (219 * 8), screenHeight / (145 * 8));
-    this.assets.stall = stall;
+      //Ship
+      const ship = this.add
+        .image(screenWidth / 1.2, (2 * screenHeight) / 12, "Ship")
+        .setOrigin(0)
+        .setScale(screenWidth / (319 * 8), screenHeight / (1091 * 1.25))
+        .setInteractive();
+      this.assets.ship = ship;
+      this.setFader(ship, "ship");
 
-    //Ship
-    const ship = this.add
-      .image(screenWidth / 1.2, (2 * screenHeight) / 12, "Ship")
-      .setOrigin(0)
-      .setScale(screenWidth / (319 * 8), screenHeight / (1091 * 1.25))
-      .setInteractive();
-    this.assets.ship = ship;
-    this.setFader(ship, "ship");
+      //Sign
+      const sign = this.add
+        .image((4.25 * screenWidth) / 7, (1 / 2) * screenHeight, "Sign")
+        .setOrigin(0)
+        .setScale(screenWidth / (319 * 5), screenHeight / (189 * 6))
+        .setInteractive();
+      this.assets.sign = sign;
 
-    //Sign
-    const sign = this.add
-      .image((4.25 * screenWidth) / 7, (1 / 2) * screenHeight, "Sign")
-      .setOrigin(0)
-      .setScale(screenWidth / (319 * 5), screenHeight / (189 * 6))
-      .setInteractive();
-    this.assets.sign = sign;
-
-    sign.on("pointerdown", function(pointer) {
-      currState.economyState =
-        currState.economyState * (Math.random() * 0.4 + 0.8).toFixed(4);
-      this.scene.scene.start("WorldMap");
-    });
-    const signTextStyle = {
-      font: "18px Arial",
-      wordWrap: true,
-      wordWrapWidth: sign.width,
-      align: "center"
-    };
-    const text = this.add.text(
-      (4.35 * screenWidth) / 7,
-      (6.5 / 12) * screenHeight,
-      "SET SAIL",
-      signTextStyle
-    );
-    this.assets.text = text;
+      sign.on("pointerdown", function(pointer) {
+        if (getCrew().length < 4) {
+          alert("You need at least four people to sail a ship!");
+        } else {
+          currState.economyState =
+            currState.economyState * (Math.random() * 0.4 + 0.8).toFixed(4);
+          this.scene.scene.start("WorldMap");
+        }
+      });
+      const signTextStyle = {
+        font: "18px Arial",
+        wordWrap: true,
+        wordWrapWidth: sign.width,
+        align: "center"
+      };
+      const text = this.add.text(
+        (4.35 * screenWidth) / 7,
+        (6.5 / 12) * screenHeight,
+        "SET SAIL",
+        signTextStyle
+      );
+      this.assets.text = text;
     }
   }
 

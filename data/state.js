@@ -2,7 +2,7 @@
 
 let currState = {
   day: 0,
-  gold: 300,
+  gold: 500,
   location: 0,
   crew: [],
   resources: {
@@ -23,7 +23,7 @@ let currState = {
   },
   economyState: 1,
   morale: 100,
-  visitedCanton: false,
+  visitedCanton: false
 };
 
 // Getters
@@ -86,7 +86,7 @@ function reset() {
   loop = 1;
   currState.visitedCanton = false;
   currState.day = 0;
-  currState.gold = 300;
+  currState.gold = 500;
   currState.location = 0;
   currState.crew = [];
   (currState.resources = {
