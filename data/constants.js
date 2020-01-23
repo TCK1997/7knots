@@ -283,7 +283,7 @@ const names = {
     "David",
     "Diogo",
     "Duarte",
-    ",Emanuel",
+    "Emanuel",
     "Emilio",
     "Erasmo",
     "Erico",
@@ -478,21 +478,21 @@ function getResources(id) {
 
 function getAllResources() {
   return [
-    'cloth',
-    'wine',
-    'silver',
-    'gold',
-    'coffee',
-    'pepper',
-    'cotton',
-    'sugar',
-    'clove',
-    'nutmeg',
-    'mace',
-    'porcelain',
-    'silk',
-    'perfume'
-  ]
+    "cloth",
+    "wine",
+    "silver",
+    "gold",
+    "coffee",
+    "pepper",
+    "cotton",
+    "sugar",
+    "clove",
+    "nutmeg",
+    "mace",
+    "porcelain",
+    "silk",
+    "perfume"
+  ];
 }
 
 function getCulture(id) {
@@ -545,18 +545,20 @@ function calculateDays(a, b) {
   } else {
     startCoords = getCoords(a);
     endCoords = getCoords(b);
-    return (Math.sqrt(
-      Math.pow(startCoords[0] - endCoords[0], 2) +
-        Math.pow(startCoords[1] - endCoords[1], 2)
-    ))/50;
+    return (
+      Math.sqrt(
+        Math.pow(startCoords[0] - endCoords[0], 2) +
+          Math.pow(startCoords[1] - endCoords[1], 2)
+      ) / 50
+    );
   }
 }
 
-function stormEvent(){
+function stormEvent() {
   addDay(7);
   decreaseMorale(14);
 }
 
-function rollOceanEvent(){
-  return randInt(1,100);
+function rollOceanEvent() {
+  return randInt(1, 100);
 }
